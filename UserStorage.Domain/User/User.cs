@@ -1,7 +1,7 @@
 ﻿using UserStorage.Domain.User.ValueObjects;
 using UserStorage.Domain.User.ValueObjects.Identifiers;
 
-namespace UserStorage.Domain;
+namespace UserStorage.Domain.User;
 
 public class User
 {
