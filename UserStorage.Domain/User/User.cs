@@ -5,7 +5,7 @@ namespace UserStorage.Domain.User;
 
 public class User
 {
-    public User(UserId userId, UserName userName, UserContacts userContacts)
+    public User(UserId userId, string userName, UserContacts userContacts)
     {
         Id = userId;
         Name = userName;
@@ -13,7 +13,7 @@ public class User
     }
 
     public UserId Id { get;}
-    public UserName Name { get;}
+    public string Name { get;}
 
     public UserContacts Contacts { get; }
 }
