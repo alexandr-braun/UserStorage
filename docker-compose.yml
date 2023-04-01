@@ -1,0 +1,35 @@
+﻿version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: user-storage
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+      - kafka
+    environment:
+      - ConnectionStrings__Default=Host=db;Database=user-storage;Username=user-storage;Password=user-storage
+      - Kafka__BootstrapServers=kafka:9092
+
+  db:
+    image: postgres
+    container_name: user-storage-postgresql
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=user-storage
+      - POSTGRES_PASSWORD=user-storage
+      - POSTGRES_DB=user-storage
+
+  kafka:
+    image: confluentinc/cp-kafka:5.5.1
+    container_name: user-storage-kafka
+    ports:
+      - "9092:9092"
+
+volumes:
+  db-data:
