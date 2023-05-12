@@ -28,7 +28,7 @@ public abstract class BaseConsumer<TEntity> : BackgroundService
             .Build();
 
         _batchSize = kafkaConfig.BatchSize;
-        _batchTimeout = TimeSpan.FromSeconds(kafkaConfig.BatchTimeout);
+        _batchTimeout = TimeSpan.FromSeconds(kafkaConfig.BatchTimeoutInSeconds);
 
         _consumer.Subscribe(kafkaConfig.Topic);
     }

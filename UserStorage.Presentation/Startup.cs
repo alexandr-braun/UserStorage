@@ -1,4 +1,5 @@
 using UserStorage.Presentation.Consumers.User;
+using UserStorage.Presentation.Options;
 
 namespace UserStorage.Presentation;
 
@@ -17,6 +18,10 @@ public class Startup
         services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
+        
+        services.Configure<KafkaOptions>(
+            Configuration.GetSection("Kafka"));
+
         
         services.AddHostedService<UserKafkaBatchConsumer>();    
     }
