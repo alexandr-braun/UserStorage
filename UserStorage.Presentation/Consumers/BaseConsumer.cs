@@ -58,7 +58,7 @@ public abstract class BaseConsumer<TEntity> : BackgroundService
 
                     if (batch.Count >= _batchSize || DateTime.UtcNow - lastBatchTime >= _batchTimeout)
                     {
-                        await ProcessBatchAsync(batch);
+                        await ProcessBatchAsync(batch, cancellationToken);
 
                         batch.Clear();
                         lastBatchTime = DateTime.UtcNow;
@@ -68,7 +68,7 @@ public abstract class BaseConsumer<TEntity> : BackgroundService
 
             if (batch.Any())
             {
-                await ProcessBatchAsync(batch);
+                await ProcessBatchAsync(batch, cancellationToken);
             }
         }
         catch (Exception ex)
@@ -82,5 +82,5 @@ public abstract class BaseConsumer<TEntity> : BackgroundService
         }
     }
 
-    protected abstract Task ProcessBatchAsync(List<ConsumeResult<Ignore, string>> batch);
+    protected abstract Task ProcessBatchAsync(List<ConsumeResult<Ignore, string>> batch, CancellationToken cancellationToken);
 }
