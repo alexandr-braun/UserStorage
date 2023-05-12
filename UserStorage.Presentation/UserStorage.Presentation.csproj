@@ -11,6 +11,7 @@
     <PackageReference Include="MediatR" Version="12.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Confluent.Kafka" Version="2.0.2" />
   </ItemGroup>
@@ -22,12 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\UserStorage.Application\UserStorage.Application.csproj" />
     <ProjectReference Include="..\UserStorage.Domain\UserStorage.Domain.csproj" />
     <ProjectReference Include="..\UserStorage.Infrastructure\UserStorage.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Consumers\User\Converters" />
   </ItemGroup>
 
 </Project>
