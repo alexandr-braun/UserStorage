@@ -30,7 +30,7 @@ services:
     networks:
       - broker-kafka
     ports:
-      - 2181:2181
+      - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -43,7 +43,7 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 9092:9092
+      - "9092:9092"
     environment:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
@@ -62,7 +62,7 @@ services:
     depends_on:
       - kafka
     ports:
-      - 9000:9000
+      - "9000:9000"
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
 
