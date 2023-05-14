@@ -1,3 +1,6 @@
+using System.Reflection;
+using MediatR;
+using UserStorage.Application;
 using UserStorage.Presentation.Consumers.User;
 using UserStorage.Presentation.Options;
 
@@ -22,7 +25,10 @@ public class Startup
         services.Configure<KafkaOptions>(
             Configuration.GetSection("Kafka"));
 
-        
+        services.AddMediatR(
+            cfg=>cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly(), 
+                Assembly.GetAssembly(typeof(IAssemblyMarker))));
+
         services.AddHostedService<UserKafkaBatchConsumer>();    
     }
 
