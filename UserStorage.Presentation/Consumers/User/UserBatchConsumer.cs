@@ -12,10 +12,12 @@ namespace UserStorage.Presentation.Consumers.User;
 public class UserKafkaBatchConsumer : BaseConsumer<UserContract>
 {
     private readonly IMediator _mediator;
-    
+    private readonly ILogger<UserKafkaBatchConsumer> _logger;
+
     public UserKafkaBatchConsumer(ILogger<UserKafkaBatchConsumer> logger, IMediator mediator,  IOptions<KafkaOptions> kafkaOptions)
         : base(logger, kafkaOptions)
     {
+        _logger = logger;
         _mediator = mediator;
     }
 
@@ -23,6 +25,8 @@ public class UserKafkaBatchConsumer : BaseConsumer<UserContract>
     {
         foreach (ConsumeResult<Ignore, string> consumeResult in batch)
         {
+            _logger.LogInformation("Start processing message {Value}", consumeResult.Message.Value);
+
             UserContract? userContract = JsonConvert.DeserializeObject<UserContract>(consumeResult.Message.Value);
 
             AddUserCommand addUserCommand = UserContractConverter.ToAddUserCommand(userContract);
